@@ -1,15 +1,15 @@
 import { map } from 'rxjs/operators';
-import { IBikeStation } from './../../../interfaces/bikes.interfaces';
-import { BikesService } from './../../../services/bikes.service';
+import { IBikeStation } from '../../../interfaces/bikes.interfaces';
+import { BikesService } from '../../../services/bikes.service';
 import { Component, OnInit } from '@angular/core';
 import getDistance from 'geolib/es/getDistance';
 import { GeolibInputCoordinates } from 'geolib/es/types';
 @Component({
-  selector: 'app-bikes-list',
-  templateUrl: './bikes-list.component.html',
-  styleUrls: ['./bikes-list.component.scss'],
+  selector: 'app-bike-stations-list',
+  templateUrl: './bike-stations-list.component.html',
+  styleUrls: ['./bike-stations-list.component.scss'],
 })
-export class BikesListComponent implements OnInit {
+export class BikeStationsListComponent implements OnInit {
   bikeStations: IBikeStation[];
   private geolocationOptions: PositionOptions = {
     enableHighAccuracy: true,
