@@ -1,0 +1,65 @@
+.bike-container {
+  padding: 2em;
+}
+
+.bike-title {
+  color: #303030;
+  font-family: "Bold";
+  font-size: 22px;
+}
+
+.bike-subtitle {
+  font-family: "Bold";
+  display: flex;
+  font-size: 12px;
+  color: #3f3f3f;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dot {
+  color: #bcbcbc;
+  font-size: 22px;
+  margin: 0 5px;
+}
+
+.location {
+  font-family: "Medium";
+  color: #8c8c8c;
+}
+
+img {
+  height: 20px;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.available {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.available-label {
+  font-family: "Medium";
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  height: 50px;
+}
+
+.num-of-bikes {
+  color: #65d197;
+}
+
+.num-of-racks {
+  color: #3f3f3f;
+}
