@@ -23,7 +23,6 @@ export class BikeStationsEffects {
         }
       }),
       mergeMap((bikeStations) => [
-        LocationActions.getUserLocation(),
         BikeStationsActions.changeBikeStations({ bikeStations }),
       ])
     )

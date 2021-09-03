@@ -1,9 +1,15 @@
-<div class="bike-container">
+<div
+  class="bike-container"
+  (DOMCharacterDataModified)="changeHeight()"
+  id="bike-container"
+>
   <section class="bike-title">
     {{ bikeStation.properties.label }}
   </section>
   <section class="bike-subtitle">
-    <span class="distance">{{ formatDistance(bikeStation.geometry.distance) }}</span>
+    <span class="distance">{{
+      formatDistance(bikeStation.geometry.distance)
+    }}</span>
     <span class="dot">&#183;</span>
     <span class="location">{{ bikeStationLocation }}</span>
   </section>

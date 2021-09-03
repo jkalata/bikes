@@ -1,3 +1,4 @@
+import { IUserLocation } from './../interfaces/location.interfaces';
 import {
   changeUserLocation,
   changeErrorFlag,
@@ -12,12 +13,12 @@ import { AppState } from '../store';
 export class LocationService {
   private geolocationOptions: PositionOptions = {
     enableHighAccuracy: true,
-    maximumAge: 10000,
+    maximumAge: 1000,
   };
 
   constructor(private store: Store<AppState>) {}
 
-  getUserLocation() {
+  getUserLocation(): void {
     navigator.geolocation.watchPosition(
       this.success.bind(this),
       this.error.bind(this),
@@ -25,12 +26,23 @@ export class LocationService {
     );
   }
 
-  private success(userLocation: GeolocationPosition) {
-    this.store.dispatch(changeUserLocation({ userLocation }));
+  private success(userLocation: GeolocationPosition): void {
+    this.store.dispatch(
+      changeUserLocation({ userLocation: this.mapUserLocation(userLocation) })
+    );
     this.store.dispatch(changeErrorFlag({ error: false }));
   }
 
-  private error() {
+  private error(): void {
     this.store.dispatch(changeErrorFlag({ error: true }));
+  }
+
+  private mapUserLocation(userLocation: GeolocationPosition): IUserLocation {
+    return {
+      lat: userLocation.coords.latitude,
+      lon: userLocation.coords.longitude,
+      accuracy: userLocation.coords.accuracy,
+      timestamp: userLocation.timestamp,
+    };
   }
 }

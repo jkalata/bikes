@@ -50,6 +50,11 @@ $frontend-theme: mat.define-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --bikes-color: #65d197;
+  --racks-color: #3f3f3f;
+}
+
 html,
 body {
   height: 100%;
@@ -61,4 +66,13 @@ body {
 
 .bold {
   font-family: "Bold";
+}
+
+.leaflet-tooltip.bike-station-label {
+  background-color: transparent;
+  border: transparent;
+  box-shadow: none;
+  color: var(--bikes-color);
+  font-family: "Medium";
+  font-size: 20px;
 }

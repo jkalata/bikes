@@ -1,8 +1,9 @@
+import { IUserLocation } from './../../interfaces/location.interfaces';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as LocationActions from '../actions/location.actions';
 
 export interface LocationState {
-  userLocation: GeolocationPosition;
+  userLocation: IUserLocation;
   error: boolean;
 }
 

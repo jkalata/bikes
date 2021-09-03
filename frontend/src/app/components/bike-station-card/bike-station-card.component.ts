@@ -1,3 +1,4 @@
+import { MapHeightService } from './../../services/map-height.service';
 import convertDistance from 'geolib/es/convertDistance';
 import { IBikeStation } from '../../interfaces/bikes.interfaces';
 import { Component, Input } from '@angular/core';
@@ -11,7 +12,7 @@ export class BikeStationCardComponent {
   @Input() bikeStation: IBikeStation;
   bikeStationLocation: string = 'ulica Testowa';
   usersLocation;
-  constructor() {}
+  constructor(private mapHeightService: MapHeightService) {}
 
   formatDistance(distanceInMetres: number): string {
     if (distanceInMetres === undefined) {
@@ -22,5 +23,11 @@ export class BikeStationCardComponent {
     } else {
       return `${distanceInMetres} m`;
     }
+  }
+
+  changeHeight() {
+    this.mapHeightService.setBikeStationCardHeight(
+      document.getElementById('bike-container').offsetHeight
+    );
   }
 }

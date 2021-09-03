@@ -1,0 +1,6 @@
+<div
+  [ngStyle]="{ height: calculateHeight() | async }"
+  leaflet
+  [leafletOptions]="options"
+  (leafletMapReady)="onMapReady($event)"
+></div>

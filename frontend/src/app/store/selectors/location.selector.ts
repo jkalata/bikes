@@ -7,3 +7,8 @@ export const selectErrorFlag = createSelector(
   selectLocationState,
   (locationState: LocationState) => locationState.error
 );
+
+export const selectUserLocation = createSelector(
+  selectLocationState,
+  (locationState: LocationState) => locationState.userLocation
+);

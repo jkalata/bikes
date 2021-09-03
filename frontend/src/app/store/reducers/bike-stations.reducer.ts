@@ -22,8 +22,8 @@ const bikeStationsReducer = createReducer(
     BikeStationsActions.sortBikeStationsByDistance,
     (state, { userLocation }) => {
       const from: GeolibInputCoordinates = {
-        latitude: userLocation.coords.latitude,
-        longitude: userLocation.coords.longitude,
+        latitude: userLocation.lat,
+        longitude: userLocation.lon,
       };
 
       const sortedBikeStationsList = state.bikeStations

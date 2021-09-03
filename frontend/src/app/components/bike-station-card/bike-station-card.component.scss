@@ -53,13 +53,13 @@ img {
   display: flex;
   align-items: center;
   font-size: 50px;
-  height: 50px;
+  margin-top: 10px;
 }
 
 .num-of-bikes {
-  color: #65d197;
+  color: var(--bikes-color);
 }
 
 .num-of-racks {
-  color: #3f3f3f;
+  color: var(--racks-color);
 }
