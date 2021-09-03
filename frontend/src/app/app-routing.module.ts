@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'planner/bikes',
+    redirectTo: 'planner',
   },
   {
     path: 'planner',

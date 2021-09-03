@@ -14,6 +14,9 @@ export class BikeStationCardComponent {
   constructor() {}
 
   formatDistance(distanceInMetres: number): string {
+    if (distanceInMetres === undefined) {
+      return 'N/A';
+    }
     if (distanceInMetres > 1000) {
       return `${convertDistance(distanceInMetres, 'km').toFixed(2)} km`;
     } else {
