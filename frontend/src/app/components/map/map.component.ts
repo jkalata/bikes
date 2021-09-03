@@ -112,6 +112,7 @@ export class MapComponent implements OnChanges {
         fillOpacity: 1,
         color: '#ffffff',
         radius: 12,
+        className: 'bike-station-marker',
       }).bindTooltip(this.bikeStation.properties.bikes, {
         permanent: true,
         className: 'bike-station-label',
