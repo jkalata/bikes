@@ -9,7 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class BikeStationCardComponent {
   @Input() bikeStation: IBikeStation;
-  bikeStationLocation: string = 'ulica Testowa';
   usersLocation;
   constructor(private mapHeightService: MapHeightService) {}
 

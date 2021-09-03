@@ -20,6 +20,7 @@ interface IBikeGeometry {
   coordinates: number[];
   type: string;
   distance: number;
+  address: string;
 }
 
 interface IBikeProperties {

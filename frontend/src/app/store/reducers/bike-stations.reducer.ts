@@ -37,6 +37,8 @@ const bikeStationsReducer = createReducer(
             geometry: {
               ...station.geometry,
               distance: getDistance(from, to),
+              //TODO reverse geocoding
+              address: 'ulica Testowa',
             },
           };
         })

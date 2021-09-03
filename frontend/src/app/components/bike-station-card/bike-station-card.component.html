@@ -3,26 +3,30 @@
   (DOMCharacterDataModified)="changeHeight()"
   id="bike-container"
 >
-  <section class="bike-title">
+  <section class="bike-title" data-testid="bike-title">
     {{ bikeStation.properties.label }}
   </section>
   <section class="bike-subtitle">
-    <span class="distance">{{ bikeStation.geometry.distance | distance }}</span>
+    <span class="distance" data-testid="distance">{{
+      bikeStation.geometry.distance | distance
+    }}</span>
     <div class="dot"></div>
-    <span class="location">{{ bikeStationLocation }}</span>
+    <span class="location" data-testid="location">{{
+      bikeStation.geometry.address
+    }}</span>
   </section>
   <section class="details">
     <div class="available">
-      <img src="assets/icons/Bike.svg" />
+      <img data-testid="bike-icon" src="assets/icons/Bike.svg" />
       <span class="available-label">Available bikes</span>
-      <span class="num-of-bikes number">
+      <span class="num-of-bikes number" data-testid="num-of-bikes">
         {{ bikeStation.properties.bikes }}
       </span>
     </div>
     <div class="available">
-      <img src="assets/icons/Lock.svg" />
+      <img data-testid="rack-icon" src="assets/icons/Lock.svg" />
       <span class="available-label">Available places</span>
-      <span class="num-of-racks number">
+      <span class="num-of-racks number" data-testid="num-of-racks">
         {{ bikeStation.properties.free_racks }}
       </span>
     </div>
