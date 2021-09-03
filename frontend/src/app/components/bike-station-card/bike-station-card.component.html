@@ -7,9 +7,7 @@
     {{ bikeStation.properties.label }}
   </section>
   <section class="bike-subtitle">
-    <span class="distance">{{
-      formatDistance(bikeStation.geometry.distance)
-    }}</span>
+    <span class="distance">{{ bikeStation.geometry.distance | distance }}</span>
     <span class="dot">&#183;</span>
     <span class="location">{{ bikeStationLocation }}</span>
   </section>
