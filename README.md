@@ -1,6 +1,6 @@
 # Readme
 #### Moduły
-Aplikacja poza nadrzędnym **AppModule** składa się z modułu **PlannerModule**, który poprzez Route\'y ładuje (lazy) **BikeStationsListModule** oraz **BikeStationDetailsModule**
+Aplikacja poza nadrzędnym **AppModule** składa się z modułu **PlannerModule**, który poprzez Route\'y ładuje (lazy loading) **BikeStationsListModule** oraz **BikeStationDetailsModule**
 
 #### Informacje o stacjach rowerowych
 Komponent wyświetlający listę stacji (**BikeStationsListComponent**) wywołuje request do API. Informacje są zapisywane w Store. Dodatkowo stan Store\'a jest zapisywany w sessionStorage (Store Rehydration). Komponenty reaktywnie poprzez selectory pobierają interesujące je dane.
