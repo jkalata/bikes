@@ -23,4 +23,10 @@ describe('LocationService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('calls navigator.geolocation', () => {
+    const spy = spyOn(navigator.geolocation, 'watchPosition');
+    service.getUserLocation();
+    expect(spy).toHaveBeenCalled();
+  });
 });
