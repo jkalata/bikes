@@ -34,6 +34,7 @@ export function localStorageSyncReducer(
   return localStorageSync({
     keys: ['bikeStations', 'location'],
     rehydrate: true,
+    storage: sessionStorage,
   })(reducer);
 }
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
