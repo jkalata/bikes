@@ -21,7 +21,7 @@ export class BikeStationDetailsComponent {
     this.getBikeStationById();
   }
 
-  private getBikeStationById() {
+  private getBikeStationById(): void {
     this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
       this.bikeStation = this.store.pipe(
         select(selectBikeStationById({ stationId: params.id }))

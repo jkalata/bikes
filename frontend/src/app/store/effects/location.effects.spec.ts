@@ -12,7 +12,9 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import * as LocationAcions from '../actions/location.actions';
 
 describe('LocationEffects', () => {
-  let getUserLocation: Observable<Action> = of(LocationAcions.getUserLocation);
+  const getUserLocation: Observable<Action> = of(
+    LocationAcions.getUserLocation
+  );
 
   let actions$: Observable<Action>;
   let effects: LocationEffects;

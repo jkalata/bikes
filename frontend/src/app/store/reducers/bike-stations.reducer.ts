@@ -41,7 +41,7 @@ const bikeStationsReducer = createReducer(
 export function sortBikeStationsByCoordinates(
   bikeStations: IBikeStation[],
   from: GeolibInputCoordinates
-) {
+): IBikeStation[] {
   return bikeStations
     .map((station) => {
       const to: GeolibInputCoordinates = {
@@ -53,7 +53,7 @@ export function sortBikeStationsByCoordinates(
         geometry: {
           ...station.geometry,
           distance: getDistance(from, to),
-          //TODO reverse geocoding
+          // TODO reverse geocoding
           address: 'ulica Testowa',
         },
       };

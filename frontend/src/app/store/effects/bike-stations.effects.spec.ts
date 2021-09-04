@@ -13,11 +13,11 @@ import * as BikeStationsAcions from '../actions/bike-stations.actions';
 import * as LocationAcions from '../actions/location.actions';
 
 describe('BikeStationsEffects', () => {
-  let getBikeStationsAction: Observable<Action> = of(
+  const getBikeStationsAction: Observable<Action> = of(
     BikeStationsAcions.getBikeStations
   );
 
-  let changeUserLocation: Observable<Action> = of(
+  const changeUserLocation: Observable<Action> = of(
     LocationAcions.changeUserLocation
   );
 

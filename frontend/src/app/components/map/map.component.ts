@@ -58,7 +58,7 @@ export class MapComponent implements OnChanges {
     return this.mapHeightService.getMapHeight();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.getBikeStationLocation();
   }
 
@@ -105,7 +105,7 @@ export class MapComponent implements OnChanges {
     );
   }
 
-  private getBikeStationMarker() {
+  private getBikeStationMarker(): void {
     this.map.addLayer(
       circleMarker(this.bikeStationLocation, {
         fillColor: '#ffffff',
@@ -121,6 +121,7 @@ export class MapComponent implements OnChanges {
         opacity: 1,
       })
     );
+
     this.map.addLayer(
       marker(this.bikeStationLocation, {
         icon: this.bikeIcon,

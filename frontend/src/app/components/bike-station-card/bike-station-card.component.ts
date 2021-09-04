@@ -12,7 +12,7 @@ export class BikeStationCardComponent implements AfterViewInit {
   usersLocation;
   constructor(private mapHeightService: MapHeightService) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.changeHeight();
   }
 

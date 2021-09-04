@@ -11,7 +11,7 @@ import { AppState } from './store';
 export class AppComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.store.dispatch(getUserLocation());
   }
 }

@@ -16,7 +16,7 @@ import { mapOptionsMock } from 'src/app/mocks/mocks';
 describe('MapComponent unit tests', () => {
   let spectator: Spectator<MapComponent>;
   let component: MapComponent;
-  const mapHeight: number = 20;
+  const mapHeight = 20;
   const createComponent = createComponentFactory({
     component: MapComponent,
     providers: [
