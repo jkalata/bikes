@@ -1,21 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BikeStationDetailsComponent } from './../../modules/planer/bike-station-details/bike-station-details.component';
+import { BikeStationsListComponent } from './../../modules/planer/bike-stations/bike-stations-list.component';
+import { createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
 
 import { ToolbarComponent } from './toolbar.component';
-
-describe('ToolbarComponent', () => {
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+describe('ToolbarComponent unit tests', () => {
+  let spectator: SpectatorRouting<ToolbarComponent>;
   let component: ToolbarComponent;
-  let fixture: ComponentFixture<ToolbarComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ToolbarComponent],
-    }).compileComponents();
+  const createComponent = createRoutingFactory({
+    component: ToolbarComponent,
+    declarations: [BikeStationsListComponent, BikeStationDetailsComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    routes: [
+      {
+        path: 'planer/stations',
+        component: BikeStationsListComponent,
+      },
+      {
+        path: 'planer/stations/:id',
+        component: BikeStationDetailsComponent,
+      },
+    ],
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToolbarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {

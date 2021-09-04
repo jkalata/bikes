@@ -1,22 +1,24 @@
+import { initialState } from '../../../mocks/mocks';
+import { provideMockStore } from '@ngrx/store/testing';
+import { bikeStationsMock } from 'src/app/mocks/mocks';
+import { BikeStationCardComponent } from 'src/app/components/bike-station-card/bike-station-card.component';
+import { MapComponent } from './../../../components/map/map.component';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import {
-  createComponentFactory,
-  mockProvider,
-  Spectator,
-} from '@ngneat/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { BikeStationDetailsComponent } from './bike-station-details.component';
+import { MockComponents } from 'ng-mocks';
 
 describe('BikeStationDetailsComponent', () => {
   let spectator: Spectator<BikeStationDetailsComponent>;
   let component: BikeStationDetailsComponent;
-  const snapshotMock = jasmine.createSpy('snapshot');
+
   const createComponent = createComponentFactory({
     component: BikeStationDetailsComponent,
+    declarations: MockComponents(MapComponent, BikeStationCardComponent),
     providers: [
-      mockProvider(Store),
+      provideMockStore({ initialState }),
       {
         provide: ActivatedRoute,
         useValue: {
@@ -29,10 +31,25 @@ describe('BikeStationDetailsComponent', () => {
   beforeEach(() => {
     spectator = createComponent();
     component = spectator.component;
-    // spectator.inject(ActivatedRoute).params = of({ id: 1 });
+    component.bikeStation = of(bikeStationsMock[0]);
+    spectator.detectComponentChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('renders child components', () => {
+    expect(spectator.query(MapComponent)).toBeTruthy();
+    expect(spectator.query(BikeStationCardComponent)).toBeTruthy();
+  });
+
+  it('passes inputs to child components', () => {
+    expect(spectator.query(MapComponent).bikeStation).toEqual(
+      bikeStationsMock[0]
+    );
+    expect(spectator.query(BikeStationCardComponent).bikeStation).toEqual(
+      bikeStationsMock[0]
+    );
   });
 });

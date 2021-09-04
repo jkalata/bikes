@@ -1,6 +1,6 @@
-import { AsyncPipe } from '@angular/common';
+import { initialState } from '../../mocks/mocks';
+import { provideMockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
-import { MapOptions, tileLayer, latLng } from 'leaflet';
 import { MapHeightService } from './../../services/map-height.service';
 import {
   Spectator,
@@ -8,36 +8,21 @@ import {
   mockProvider,
   byTestId,
 } from '@ngneat/spectator';
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
-import { Store } from '@ngrx/store';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { mapOptionsMock } from 'src/app/mocks/mocks';
 
 describe('MapComponent unit tests', () => {
   let spectator: Spectator<MapComponent>;
   let component: MapComponent;
   const mapHeight: number = 20;
-  const options: MapOptions = {
-    layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '...',
-      }),
-    ],
-    zoom: 16,
-    center: latLng(52.184261, 21.02123),
-    attributionControl: false,
-    zoomControl: false,
-  };
   const createComponent = createComponentFactory({
     component: MapComponent,
-    providers: [mockProvider(Store), mockProvider(MapHeightService)],
+    providers: [
+      provideMockStore({ initialState }),
+      mockProvider(MapHeightService),
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   });
 
@@ -45,9 +30,9 @@ describe('MapComponent unit tests', () => {
     spectator = createComponent();
     spectator
       .inject(MapHeightService)
-      .getMapHeight.and.returnValue(`calc(100vh - ${mapHeight}px)`);
+      .getMapHeight.and.returnValue(of(`calc(100vh - ${mapHeight}px)`));
     component = spectator.component;
-    component.options = options;
+    component.options = mapOptionsMock;
   });
 
   it('should create', () => {
@@ -58,10 +43,11 @@ describe('MapComponent unit tests', () => {
     expect(spectator.query(byTestId('map'))).toBeTruthy();
   });
 
-  it('calculates map height', fakeAsync(() => {
-    component.calculateHeight().subscribe((height) => {
-      expect(of(height)).toEqual(of(`calc(100vh - ${mapHeight}px)`));
-    });
+  it('calculates map height', () => {
+    spectator.detectComponentChanges();
     expect(spectator.inject(MapHeightService).getMapHeight).toHaveBeenCalled();
-  }));
+    expect(spectator.query(byTestId('map')).getAttribute('style')).toBe(
+      `height: calc(-${mapHeight}px + 100vh);`
+    );
+  });
 });

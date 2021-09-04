@@ -13,5 +13,3 @@ export const sortBikeStationsByDistance = createAction(
   'Sort Bike Stations By Distance',
   props<{ userLocation: IUserLocation }>()
 );
-
-export const refreshBikeStations = createAction('Refresh Bike Stations');

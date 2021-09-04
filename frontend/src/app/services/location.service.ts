@@ -13,7 +13,7 @@ import { AppState } from '../store';
 export class LocationService {
   private geolocationOptions: PositionOptions = {
     enableHighAccuracy: true,
-    maximumAge: 1000,
+    maximumAge: 10000,
   };
 
   constructor(private store: Store<AppState>) {}

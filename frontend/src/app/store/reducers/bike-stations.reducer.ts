@@ -25,33 +25,11 @@ const bikeStationsReducer = createReducer(
         latitude: userLocation.lat,
         longitude: userLocation.lon,
       };
-
-      const sortedBikeStationsList = state.bikeStations
-        .map((station) => {
-          const to: GeolibInputCoordinates = {
-            latitude: station.geometry.coordinates[1],
-            longitude: station.geometry.coordinates[0],
-          };
-          return {
-            ...station,
-            geometry: {
-              ...station.geometry,
-              distance: getDistance(from, to),
-              //TODO reverse geocoding
-              address: 'ulica Testowa',
-            },
-          };
-        })
-        .sort((a, b) => {
-          if (a.geometry.distance > b.geometry.distance) {
-            return 1;
-          } else if (a.geometry.distance < b.geometry.distance) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
-
+      let sortedBikeStationsList: IBikeStation[];
+      sortedBikeStationsList = sortBikeStationsByCoordinates(
+        state.bikeStations,
+        from
+      );
       return {
         ...state,
         bikeStations: sortedBikeStationsList,
@@ -59,6 +37,37 @@ const bikeStationsReducer = createReducer(
     }
   )
 );
+
+export function sortBikeStationsByCoordinates(
+  bikeStations: IBikeStation[],
+  from: GeolibInputCoordinates
+) {
+  return bikeStations
+    .map((station) => {
+      const to: GeolibInputCoordinates = {
+        latitude: station.geometry.coordinates[1],
+        longitude: station.geometry.coordinates[0],
+      };
+      return {
+        ...station,
+        geometry: {
+          ...station.geometry,
+          distance: getDistance(from, to),
+          //TODO reverse geocoding
+          address: 'ulica Testowa',
+        },
+      };
+    })
+    .sort((a, b) => {
+      if (a.geometry.distance > b.geometry.distance) {
+        return 1;
+      } else if (a.geometry.distance < b.geometry.distance) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+}
 
 export const reducer = (state: BikeStationsState | undefined, action: Action) =>
   bikeStationsReducer(state, action);

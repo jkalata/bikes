@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { BikesService } from './../../services/bikes.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, take } from 'rxjs/operators';
+import { catchError, mergeMap, take } from 'rxjs/operators';
 import * as BikeStationsActions from '../actions/bike-stations.actions';
 import * as LocationActions from '../actions/location.actions';
 import { AppState } from '..';
@@ -17,7 +17,11 @@ export class BikeStationsEffects {
       mergeMap(() => this.store.pipe(select(selectBikeStations), take(1))),
       mergeMap((storedBikeStations) => {
         if (storedBikeStations === null) {
-          return this.bikesService.getBikesStationList();
+          return this.bikesService.getBikesStationList().pipe(
+            catchError(() => {
+              return of(null);
+            })
+          );
         } else {
           return of(storedBikeStations);
         }
@@ -31,21 +35,23 @@ export class BikeStationsEffects {
   sortBikeStationsByDistance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LocationActions.changeUserLocation),
-      mergeMap((actionResponse) => [
-        BikeStationsActions.sortBikeStationsByDistance({
-          userLocation: actionResponse.userLocation,
-        }),
-      ])
-    )
-  );
-
-  refreshBikeStations$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BikeStationsActions.refreshBikeStations),
-      mergeMap(() => this.bikesService.getBikesStationList()),
-      mergeMap((bikeStations) => [
-        BikeStationsActions.changeBikeStations({ bikeStations }),
-      ])
+      mergeMap((actionResponse) =>
+        this.store.pipe(
+          select(selectBikeStations),
+          take(1),
+          mergeMap((bikeStations) => {
+            if (bikeStations !== null && bikeStations !== undefined) {
+              return of(
+                BikeStationsActions.sortBikeStationsByDistance({
+                  userLocation: actionResponse.userLocation,
+                })
+              );
+            } else {
+              return of(null);
+            }
+          })
+        )
+      )
     )
   );
 

@@ -1,5 +1,4 @@
 import { Store } from '@ngrx/store';
-import { TestBed } from '@angular/core/testing';
 import {
   createServiceFactory,
   SpectatorService,

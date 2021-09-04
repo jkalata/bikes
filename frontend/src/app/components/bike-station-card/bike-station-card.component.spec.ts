@@ -1,7 +1,5 @@
 import { MapHeightService } from './../../services/map-height.service';
 import { DistancePipe } from './../../pipes/distance.pipe';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BikeStationCardComponent } from './bike-station-card.component';
 import {
   Spectator,
@@ -10,6 +8,8 @@ import {
   mockProvider,
 } from '@ngneat/spectator';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { bikeStationsMock } from 'src/app/mocks/mocks';
+
 describe('BikeStationCardComponent unit tests', () => {
   let spectator: Spectator<BikeStationCardComponent>;
   let component: BikeStationCardComponent;
@@ -23,23 +23,7 @@ describe('BikeStationCardComponent unit tests', () => {
   beforeEach(() => {
     spectator = createComponent({
       props: {
-        bikeStation: {
-          geometry: {
-            coordinates: [1, 1],
-            distance: 123,
-            type: 'Type',
-            address: 'ulica Testowa',
-          },
-          id: 'Id',
-          properties: {
-            bike_racks: '12',
-            bikes: '12',
-            free_racks: '12',
-            label: 'Label',
-            updated: 'Updated',
-          },
-          type: 'Type',
-        },
+        bikeStation: bikeStationsMock[0],
       },
     });
     component = spectator.component;
@@ -67,7 +51,7 @@ describe('BikeStationCardComponent unit tests', () => {
   });
 
   it('sets card height in mapHeightService', () => {
-    component.changeHeight();
+    component.ngAfterViewInit();
     const height = document.getElementById('bike-container').offsetHeight;
 
     expect(

@@ -1,5 +1,12 @@
-<app-loader *ngIf="(bikeStations | async) === null"></app-loader>
-<div *ngFor="let bikeStation of bikeStations | async" class="bike-card">
+<app-loader
+  *ngIf="(bikeStations | async) === null"
+  data-testid="loader"
+></app-loader>
+<div
+  *ngFor="let bikeStation of bikeStations | async"
+  class="bike-card"
+  data-testid="station-list"
+>
   <app-bike-station-card
     [routerLink]="bikeStation.id"
     [bikeStation]="bikeStation"

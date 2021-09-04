@@ -1,6 +1,4 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoaderComponent } from './loader.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 

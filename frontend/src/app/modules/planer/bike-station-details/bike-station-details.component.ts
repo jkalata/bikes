@@ -13,22 +13,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./bike-station-details.component.scss'],
 })
 export class BikeStationDetailsComponent {
-  private stationId: string;
-
   bikeStation: Observable<IBikeStation>;
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store<AppState>
   ) {
-    this.getStationId();
-    this.bikeStation = this.store.pipe(
-      select(selectBikeStationById({ stationId: this.stationId }))
-    );
+    this.getBikeStationById();
   }
 
-  private getStationId() {
+  private getBikeStationById() {
     this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
-      this.stationId = params.id;
+      this.bikeStation = this.store.pipe(
+        select(selectBikeStationById({ stationId: params.id }))
+      );
     });
   }
 }

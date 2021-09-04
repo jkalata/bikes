@@ -16,7 +16,7 @@ export class BikesService {
 
   getBikesStationList(): Observable<IBikeStation[]> {
     return this.http
-      .get<IBikeListRequestResponse>(environment.bikesURL)
+      .get<IBikeListRequestResponse>(environment.apiURL)
       .pipe(map((response) => response.features));
   }
 }
