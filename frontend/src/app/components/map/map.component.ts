@@ -1,11 +1,11 @@
-import { IUserLocation } from './../../interfaces/location.interfaces';
-import { IBikeStation } from './../../interfaces/bikes.interfaces';
-import { take } from 'rxjs/operators';
-import { selectUserLocation } from './../../store/selectors/location.selector';
-import { Store, select } from '@ngrx/store';
-import { MapHeightService } from './../../services/map-height.service';
-import { Component, Input, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { IUserLocation } from "./../../interfaces/location.interfaces";
+import { IBikeStation } from "./../../interfaces/bikes.interfaces";
+import { take } from "rxjs/operators";
+import { selectUserLocation } from "./../../store/selectors/location.selector";
+import { Store, select } from "@ngrx/store";
+import { MapHeightService } from "./../../services/map-height.service";
+import { Component, Input, OnChanges } from "@angular/core";
+import { Observable } from "rxjs";
 import {
   circle,
   circleMarker,
@@ -16,22 +16,22 @@ import {
   MapOptions,
   marker,
   tileLayer,
-} from 'leaflet';
-import { AppState } from 'src/app/store';
+} from "leaflet";
+import { AppState } from "src/app/store";
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
+  selector: "app-map",
+  templateUrl: "./map.component.html",
+  styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnChanges {
   @Input() bikeStation: IBikeStation;
 
   options: MapOptions = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      tileLayer("http://maps.jakdojade.pl/osm/{z}/{x}/{y}.png", {
         maxZoom: 18,
-        attribution: '...',
+        attribution: "...",
       }),
     ],
     zoom: 16,
@@ -41,13 +41,13 @@ export class MapComponent implements OnChanges {
   };
 
   private bikeIcon = icon({
-    iconUrl: '/assets/icons/Bike.svg',
+    iconUrl: "/assets/icons/Bike.svg",
     iconSize: [16, 16],
   });
   private userLocation: LatLng;
   private bikeStationLocation: LatLng;
   private map: Map;
-  private fillColor: '#4163fb';
+  private fillColor: "#4163fb";
 
   constructor(
     private mapHeightService: MapHeightService,
@@ -108,15 +108,15 @@ export class MapComponent implements OnChanges {
   private getBikeStationMarker(): void {
     this.map.addLayer(
       circleMarker(this.bikeStationLocation, {
-        fillColor: '#ffffff',
+        fillColor: "#ffffff",
         fillOpacity: 1,
-        color: '#ffffff',
+        color: "#ffffff",
         radius: 12,
-        className: 'bike-station-marker',
+        className: "bike-station-marker",
       }).bindTooltip(this.bikeStation.properties.bikes, {
         permanent: true,
-        className: 'bike-station-label',
-        direction: 'center',
+        className: "bike-station-label",
+        direction: "center",
         offset: [25, 0],
         opacity: 1,
       })
