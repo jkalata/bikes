@@ -14,4 +14,3 @@ Napisane zostały podstawowe testy jednostkowe wszystkich komponentów, serwisó
 
 ## Uwagi
 - Określenie dokładnej lokalizacji, w której znajduje się stacja wymaga użycia *reverse geocodingu*. Istniejące API służące w tym celu są jednak albo płatne albo ograniczone (np. liczba requestów na sekundę), dlatego roboczo lokalizacja każdej ze stacji została na sztywno wpisana jako \'ulica Testowa\'.
-- Użyto standardowego stylu map OSM, ze względu na brak dostępu do stylu wymaganego w projekcie graficznym.
