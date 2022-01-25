@@ -1,16 +1,9 @@
-# Readme
-#### Moduły
-Aplikacja poza nadrzędnym **AppModule** składa się z modułu **PlannerModule**, który poprzez Route\'y ładuje (lazy loading) **BikeStationsListModule** oraz **BikeStationDetailsModule**
+# Bikes
+App is built with mobile devices in mind. It simulates bicycle renting app.
+List of bike stations is downloaded from API through HTTP request. Then it asks user for location permissions using Navigator API and calculates distance of each station from user using an external library. Then the list is sorted by distance from user (ascending).
 
-#### Informacje o stacjach rowerowych
-Komponent wyświetlający listę stacji (**BikeStationsListComponent**) wywołuje request do API. Informacje są zapisywane w Store. Dodatkowo stan Store\'a jest zapisywany w sessionStorage (Store Rehydration). Komponenty reaktywnie poprzez selectory pobierają interesujące je dane.
-Dodatkowo przy każdej zmianie lokalizacji użytkownika lista stacji jest sortowana rosnąco według dystansu użytkownika do stacji.
+Each station has its number of bikes that are available for rent and number of places to leave a previously rented bike.
 
-#### Lokalizacja użytkownika
-W **AppComponent** poprzez akcję wywoływana jest funkcja `navigator.geolocation.watchPosition()`, która wywołuje dialog pytający użytkownika o pozwolenie na lokalizację. Gdy użytkownik się nie zgodzi, lub wystąpi inny błąd związany z lokalizacją, w Store ustawiana jest flaga `error = true`. W przyszłości można to wykorzystać do wyświetlania informacji o błędach lokalizacji.
+When specific station is clicked the app renders a map with its location as well as user's location. Initially the map is centered on the station.
 
-#### Testy jednostkowe
-Napisane zostały podstawowe testy jednostkowe wszystkich komponentów, serwisów, pipe\'ów, selectorów, efektów oraz reducerów.
-
-## Uwagi
-- Określenie dokładnej lokalizacji, w której znajduje się stacja wymaga użycia *reverse geocodingu*. Istniejące API służące w tym celu są jednak albo płatne albo ograniczone (np. liczba requestów na sekundę), dlatego roboczo lokalizacja każdej ze stacji została na sztywno wpisana jako \'ulica Testowa\'.
+Application utilises NgRx store for app-wide access to the list of bike stations.
